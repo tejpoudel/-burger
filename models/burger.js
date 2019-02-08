@@ -1,29 +1,32 @@
-// Import the ORM to implement functions that will interact with the database
-var orm = require('../config/orm.js');
+// Contains boilerplate code to handle user input from front end (which is sent through burgers_controller.js)
+// and sends it to orm so request can be understood by MySQL. MySQL is then read/updated accordingly.
 
-// Create the burger object
+
+//Import the ORM to create functions that will interact with the database
+var orm = require("../Config/orm.js");
+
+//Code that will call the ORM functions using burger specific input for the ORM.
+
 var burger = {
-  // Select all burger table entries
-  selectAll: function(cb) {
-    orm.selectAll('burgers', function(res) {
-      cb(res);
-    });
-  },
+    all: function (cb) {                                    
+        orm.selectAll("burgers", function (res) {
+            cb(res);
+        });
+    },
+    // Posts to 'burgers' table
+    // Cols and vals are array variables
+    create: function (burgerName, cb) {
+        orm.insertOne(burgerName, function (res) {
+            cb(res);
+        });
+    },
 
-  // The variables cols and vals are arrays
-  insertOne: function(cols, vals, cb) {
-    orm.insertOne('burgers', cols, vals, function(res) {
-      cb(res);
-    });
-  },
-
-  // The objColVals is an object specifying columns as object keys with associated values
-  updateOne: function(objColVals, condition, cb) {
-    orm.updateOne('burgers', objColVals, condition, function(res) {
-      cb(res);
-    });
-  }
+    update: function (idNumber, cb) {
+        orm.updateOne(idNumber, function (res) {
+            cb(res);
+        });
+    }
 };
 
-// Export the database functions for the controller (burgerController.js).
+// Export the database functions for the controller (burgers_controller.js).
 module.exports = burger;

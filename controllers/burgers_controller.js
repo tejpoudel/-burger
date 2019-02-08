@@ -1,53 +1,55 @@
-// Pull in required dependencies
-var express = require('express');
+var express = require("express");
+
 var router = express.Router();
 
 // Import the model (burger.js) to use its database functions.
-var burger = require('../models/burger.js');
+var burger = require("../Models/burger.js");
 
-// Create the routes and associated logic
-router.get('/', function (req, res) {
-  burger.selectAll(function (data) {
-    var hbsObject = {
-      burgers: data
-    };
-    // console.log(hbsObject);
-    res.render('index', hbsObject);
-  });
-});
-
-router.post('/burgers', function (req, res) {
-
-  var errors = validate(req);
-  if(errors.length) {
-    return;
-  }
-
-  burger.insertOne([
-    'burger_name'
-  ], [
-      req.body.burger_name
-    ], function (data) {
-      res.redirect('/');
+router.get("/", function(req, res) {
+    burger.all(function(data) {
+      var showBurgers = {
+        burgers: data
+      };
+      console.log(showBurgers);
+      res.render("index", showBurgers);
     });
 });
-function validate(req) {
-  var errors = [];
-  if(!req.body.burger_name) {
-    errors.push('Burger name is required.');
-  }
-  return errors;
-}
-
-router.put('/burgers/:id', function (req, res) {
-  var condition = 'id = ' + req.params.id;
-
-  burger.updateOne({
-    devoured: true
-  }, condition, function (data) {
-    res.redirect('/');
-  });
+router.get("/api/burger_data", function(req, res) {
+    burger.all(function(data) {
+      var showBurgers = {
+        burgers: data
+      };
+      console.log(showBurgers);
+      res.json(showBurgers);
+    });
 });
+  
+router.post("/api/burgers/", function(req, res) {
+
+    burger.create([
+      req.body.burger_name
+    ], function(result) {
+      res.json({ id: result.insertId });
+    });
+});
+  
+router.put("/api/burgers/:id", function(req, res) {
+    var eatenBurgerID = req.params.id
+    var condition = eatenBurgerID;
+  
+    console.log(condition);
+  
+    burger.update(condition, function(result) {
+      if (result.changedRows == 0) {
+        return res.status(404).end();
+      } else {
+        console.log("Result: " + result)
+        res.status(200).end();
+        res.status(200).end();
+      }
+    });
+});
+  
 
 // Export routes for server.js to use.
 module.exports = router;

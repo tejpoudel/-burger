@@ -1,43 +1,46 @@
-<h1>Choice'n Choice Burger!</h1>
+{{!-- Setup the index.handlebars to have the template that Handlebars can render onto --}}
+{{!-- Create a button in index.handlebars that will submit the user input into the database. --}}
 
-<main>
-  <div class="container">
-    <div class="row">
-      <div class="col s6">
-        {{#each burgers}}
-        {{#unless this.devoured}}
-        <div>
-          <form action="/burgers/{{this.id}}?_method=PUT" method="POST">
-            <button type="submit" class='burgerAvailable'> {{this.burger_name}}</button>
-          </form>
-        </div>
-        {{/unless}}
-        {{/each}}
+<div class="page-wrap">
 
-      </div>
+  <h1>Choice'n Choice Burger!</h1>
 
-      <div class="col s6">
-        {{#each burgers}}
-        {{#if this.devoured}}
-        <div class='burgerEaten'>
-          <div>
-            {{this.burger_name}}
-          </div>
-        </div>
-        {{/if}}
-        {{/each}}
-      </div>
-    </div>
+  <div class="uneaten-burgers">
+    <h2>Waiting for your Order..</h2>
+
+    <ul class="uneaten">
+      {{#each burgers}}
+      {{#unless devoured}}
+      {{> burgers/burger-block devoured=false}}
+      {{/unless}}
+      {{/each}}
+    </ul>
+
   </div>
-</main>
 
-<h2>Add A Burger</h2>
+  <div class="eaten-burgers">
+    <h2>Eaten!</h2>
 
-<div class="row">
-  <div class="col s12">
-    <form action="/burgers" method="POST">
-      <input type="text" id="name" name="burger_name" placeholder="Uber Delicious Burger">
-      <button type="submit" class="addBurgerButton">Add The Burger</button>
+    <ul class="eaten">
+      {{#each burgers}}
+      {{#if devoured}}
+      {{> burgers/burger-block devoured=true}}
+      {{/if}}
+      {{/each}}
+    </ul>
+
+  </div>
+
+  <div class="burger-form">
+    <h2>Add a Burger</h2>
+
+    <form class="new-burger-form">
+      <div class="form-group">
+        <input type="text" id="burg" name="name" placeholder="Burger name">
+      </div>
+
+      <button type="submit">Add</button>
     </form>
   </div>
+
 </div>

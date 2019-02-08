@@ -1,26 +1,28 @@
 {
-  "name": "burger",
+  "name": "Burger",
   "version": "1.0.0",
-  "description": "",
-  "main": "burger.js",
+  "description": "### Overview",
+  "main": "server.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/tejpoudel/burger.git"
+    "url": "git+https://github.com/WladSF/Burger.git"
   },
-  "author": "Tej Poudel",
+  "keywords": [],
+  "author": "",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/tejpoudel/burger/issues"
+    "url": "https://github.com/WladSF/Burger/issues"
   },
-  "homepage": "https://github.com/tejpoudel/burger#readme",
+  "homepage": "https://github.com/WladSF/Burger#readme",
   "dependencies": {
+    "body-parser": "^1.18.3",
     "express": "^4.16.4",
     "express-handlebars": "^3.0.0",
-    "method-override": "^3.0.0",
     "mysql": "^2.16.0",
-    "nodemon": "^1.18.9"
+    "sequelize-heroku": "^2.0.0"
   }
 }
