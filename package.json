@@ -11,7 +11,10 @@
     "type": "git",
     "url": "git+https://github.com/WladSF/Burger.git"
   },
-  "keywords": [],
+  "keywords": [
+    "example",
+    "heroku"
+  ],
   "author": "",
   "license": "ISC",
   "bugs": {
@@ -24,5 +27,8 @@
     "express-handlebars": "^3.0.0",
     "mysql": "^2.16.0",
     "sequelize-heroku": "^2.0.0"
+  },
+  "engines": {
+    "node": "10.x"
   }
 }
