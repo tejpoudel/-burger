@@ -1,7 +1,5 @@
 var express = require("express");
 
-var PORT = process.env.PORT || 8000;
-
 var app = express();
 
 // Serve static content for the app from the "public" directory in the application directory.
@@ -21,6 +19,8 @@ app.set("view engine", "handlebars");
 var routes = require("./Controllers/burgers_controller.js");
 
 app.use(routes);
+
+var PORT = process.env.PORT || 8000;
 
 app.listen(PORT, function() {
   console.log("Server listening on: http://localhost:" + PORT);
