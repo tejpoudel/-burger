@@ -31,5 +31,9 @@
   },
   "engines": {
     "node": "10.x"
+  },
+  "production": {
+    "use_env_variable": "JAWSDB_URL",
+    "dialect": "mysql"
   }
 }
