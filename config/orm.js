@@ -1,6 +1,6 @@
 //Import(require) MySQL connection (connection.js) into orm.js
 //=========================================
-var connection = require("../Config/connection.js");
+var connection = require("../config/connection.js");
 
 var orm = {
     selectAll: function(tableInput, cb) {
